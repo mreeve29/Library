@@ -32,6 +32,10 @@ public class ReturnSingleBookDialog extends GBDialog{
 		
 		bookDetails.setEditable(false);
 		bookDetails.setText(b.toString());
-	}
+		
+		setVisible(true);
+		setSize(400,400);
+		setTitle("Return book");
+		}
 
 }

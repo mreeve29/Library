@@ -12,7 +12,7 @@ public class ViewAllBooksDialog extends GBDialog{
 	
 	private JList bookList = addList(1,1,1,1);
 	
-	
+	JFrame main;
 	
 	private void populateList() {
 		if(books.size() == 0)return;
@@ -31,15 +31,16 @@ public class ViewAllBooksDialog extends GBDialog{
 		indexSelected = list.getSelectedIndex();
 	}
 	
-	public void listDoubleClicked(JList list) {
+	public void listDoubleClicked(JList list, String itemClicked) {
 		selectedBook = books.get(list.getSelectedIndex());
 		indexSelected = list.getSelectedIndex();
+		openDialog();
 	}
 	
 	private void openDialog() {
 		if(selectedBook.isCheckedOut()) {
 			//open return dialog
-			//ReturnSingleBookDialog rsbd = new ReturnSingleBookDialog(this, books, selectedBook, indexSelected);
+			ReturnSingleBookDialog rsbd = new ReturnSingleBookDialog(main, books, selectedBook, indexSelected);
 		}else {
 			//open check out dialog
 		}
@@ -47,6 +48,7 @@ public class ViewAllBooksDialog extends GBDialog{
 	
 	public ViewAllBooksDialog(JFrame parent, ArrayList<Book> list) {
 		super(parent);
+		main = parent;
 		books = list;
 		populateList();
 		this.setTitle("Extra Credit");

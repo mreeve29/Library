@@ -65,7 +65,7 @@ public class Book {
 		String out =  
 				"Title: " + title + '\n' + 
 				"Author: " + author + '\n' + 
-				"Checked Out?: " + checkedOut + '\n';
+				"Available? " + !checkedOut + '\n';
 		if(checkedOut) {
 			out += "Borrower: " + borrower + '\n' +
 					"Date Checked Out: " + borrowDate;
