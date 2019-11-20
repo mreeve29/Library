@@ -50,6 +50,7 @@ public class LoanBookDialog extends GBDialog{
 			
 			Book updated = new Book(selectedBook.getTitle(), selectedBook.getAuthor(), borrowerNameField.getText(), d,true);
 			books.set(indexSelected, updated);
+
 			dispose();
 		}
 	}
