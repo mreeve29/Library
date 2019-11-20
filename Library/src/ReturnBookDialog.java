@@ -7,6 +7,7 @@ import javax.swing.*;
 public class ReturnBookDialog extends GBDialog{
 	
 	private ArrayList<Book> books;
+	private ArrayList<Book> checkedOut = new ArrayList<Book>();
 	
 	private Book selectedBook;
 	private int indexSelected;
@@ -41,15 +42,15 @@ public class ReturnBookDialog extends GBDialog{
 	}
 	
 	public void listItemSelected(JList list) {
-		bookDetails.setText("Book Selected:\n" + books.get(list.getSelectedIndex()).toString());
-		selectedBook = books.get(list.getSelectedIndex());
-		indexSelected = list.getSelectedIndex();
+		bookDetails.setText("Book Selected:\n" + checkedOut.get(list.getSelectedIndex()).toString());
+		selectedBook = checkedOut.get(list.getSelectedIndex());
+		indexSelected = books.indexOf(selectedBook);
 	}
 	
 	public void listDoubleClicked(JList list) {
-		bookDetails.setText("Book Selected:\n" + books.get(list.getSelectedIndex()).toString());
-		selectedBook = books.get(list.getSelectedIndex());
-		indexSelected = list.getSelectedIndex();
+		bookDetails.setText("Book Selected:\n" + checkedOut.get(list.getSelectedIndex()).toString());
+		selectedBook = checkedOut.get(list.getSelectedIndex());
+		indexSelected = books.indexOf(selectedBook);
 	}
 	
 	
@@ -59,6 +60,9 @@ public class ReturnBookDialog extends GBDialog{
 		bookDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
 		books = list;
+		for(Book b : list) {
+			if(b.isCheckedOut())checkedOut.add(b);
+		}
 		populateList();
 		
 

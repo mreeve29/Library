@@ -7,6 +7,7 @@ import javax.swing.*;
 public class LoanBookDialog extends GBDialog{
 	
 	private ArrayList<Book> books;
+	private ArrayList<Book> available = new ArrayList<Book>();
 	
 	private Book selectedBook;
 	private int indexSelected;
@@ -64,9 +65,9 @@ public class LoanBookDialog extends GBDialog{
 	
 
 	private void populateList() {
-		if(books.size() == 0)return;
-		for(Book b : books) {
-			if(!b.isCheckedOut())addItemToList(b.getTitle());
+		if(available.size() == 0)return;
+		for(Book b : available) {
+			addItemToList(b.getTitle());
 		}
 	}
 	
@@ -76,16 +77,15 @@ public class LoanBookDialog extends GBDialog{
 	}
 	
 	public void listItemSelected(JList list) {
-		bookDetails.setText("Book Selected:\n" + books.get(list.getSelectedIndex()).toString());
-		selectedBook = books.get(list.getSelectedIndex());
-		indexSelected = list.getSelectedIndex();
+		bookDetails.setText("Book Selected:\n" + available.get(list.getSelectedIndex()).toString());
+		selectedBook = available.get(list.getSelectedIndex());
+		indexSelected = books.indexOf(selectedBook);
 	}
 	
 	public void listDoubleClicked(JList list, String itemSelected) {
-		bookDetails.setText("Book Selected:\n" + books.get(list.getSelectedIndex()).toString());
-		selectedBook = books.get(list.getSelectedIndex());
-		System.out.println(selectedBook);
-		indexSelected = list.getSelectedIndex();
+		bookDetails.setText("Book Selected:\n" + available.get(list.getSelectedIndex()).toString());
+		selectedBook = available.get(list.getSelectedIndex());
+		indexSelected = books.indexOf(selectedBook);
 	}
 	
 	
@@ -95,6 +95,9 @@ public class LoanBookDialog extends GBDialog{
 		bookDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
 		books = list;
+		for(Book b : list) {
+			if(!b.isCheckedOut())available.add(b);
+		}
 		populateList();
 		
 		monthField.setNumber(d.getMonth());

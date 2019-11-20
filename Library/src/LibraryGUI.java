@@ -29,7 +29,6 @@ public class LibraryGUI extends GBFrame{
 			
 		}else if(button == outputAllBooksButton) {
 			OutputDialog od = new OutputDialog(this, lib.getBooks(), "All books in library:", "All Books");
-			//for(Book b : lib.getBooks())System.out.println(b);
 			
 		}else if(button == extraCreditButton) {
 			ViewAllBooksDialog vabd = new ViewAllBooksDialog(this, lib.getBooks());
