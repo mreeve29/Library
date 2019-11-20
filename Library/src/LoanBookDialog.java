@@ -27,6 +27,18 @@ public class LoanBookDialog extends GBDialog{
 	
 	public void buttonClicked(JButton button) {
 		if(button == enterButton) {
+			
+			if(selectedBook == null) {
+				messageBox("Please select a book to loan out");
+				return;
+			}
+			
+			String borrower = borrowerNameField.getText();
+			if(isBlank(borrower)) {
+				messageBox("Empty borrower");
+				return;
+			}
+			
 			Date d = new Date(monthField.getNumber(), dayField.getNumber(), yearField.getNumber());
 			
 			try {
@@ -41,6 +53,14 @@ public class LoanBookDialog extends GBDialog{
 			dispose();
 		}
 	}
+	
+	private boolean isBlank(String s) {
+		for(int i = 0; i < s.length(); i++) {
+			if(!Character.isWhitespace(s.charAt(i))) return false;
+		}
+		return true;
+	}
+	
 
 	private void populateList() {
 		if(books.size() == 0)return;
@@ -60,14 +80,15 @@ public class LoanBookDialog extends GBDialog{
 		indexSelected = list.getSelectedIndex();
 	}
 	
-	public void listDoubleClicked(JList list) {
+	public void listDoubleClicked(JList list, String itemSelected) {
 		bookDetails.setText("Book Selected:\n" + books.get(list.getSelectedIndex()).toString());
 		selectedBook = books.get(list.getSelectedIndex());
+		System.out.println(selectedBook);
 		indexSelected = list.getSelectedIndex();
 	}
 	
 	
-	public LoanBookDialog(JFrame parent, ArrayList<Book> list) {
+	public LoanBookDialog(JFrame parent, ArrayList<Book> list, Date d) {
 		super(parent);
 		bookDetails.setEditable(false);
 		bookDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
@@ -75,6 +96,9 @@ public class LoanBookDialog extends GBDialog{
 		books = list;
 		populateList();
 		
+		monthField.setNumber(d.getMonth());
+		dayField.setNumber(d.getDay());
+		yearField.setNumber(d.getYear());
 
 		this.setTitle("Loan Out Book");
 		this.setSize(400,400);

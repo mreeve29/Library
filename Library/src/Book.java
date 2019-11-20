@@ -1,9 +1,12 @@
+import java.util.Calendar;
+
 public class Book {
 	private String title;
 	private String author;
 	private String borrower;
 	private Date borrowDate;
 	private boolean checkedOut;
+	private String[] keywords;
 	
 	public Book() {
 		title = "";
@@ -19,6 +22,7 @@ public class Book {
 		borrower = borrow;
 		borrowDate = date;
 		checkedOut = check;
+		keywords = title.split(" ");
 	}
 	
 	public String getTitle() {
@@ -61,15 +65,35 @@ public class Book {
 		checkedOut = b;
 	}
 	
+	public String[] getKeywords() {
+		return keywords;
+	}
+	
 	public String toString() {
 		String out =  
 				"Title: " + title + '\n' + 
-				"Author: " + author + '\n' + 
-				"Available? " + !checkedOut + '\n';
+				"Author: " + author + '\n';
 		if(checkedOut) {
-			out += "Borrower: " + borrower + '\n' +
+			out += "Loaned Out\n" + 
+					"Borrower: " + borrower + '\n' +
 					"Date Checked Out: " + borrowDate;
-		}
+		}else {
+			out += "Available\n";
+		}		
 		return out;
+		
 	}
+	
+	public boolean isOverdue(Date d) {
+		Calendar newCal = Calendar.getInstance();
+		newCal.set(d.getYear(), d.getMonth(), d.getDay());
+		newCal = Date.removeTimeFromDate(newCal);
+		if(!checkedOut)return false;
+		System.out.println(newCal.getTimeInMillis() + " - " + borrowDate.getTime() + " > " + Date.FOURTEEN_DAYS);
+		if(newCal.getTimeInMillis() - borrowDate.getTime() > Date.FOURTEEN_DAYS) {
+			return true;
+		}else return false;
+	}
+	
+	
 }

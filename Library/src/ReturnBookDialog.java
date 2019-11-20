@@ -18,6 +18,10 @@ public class ReturnBookDialog extends GBDialog{
 	
 	public void buttonClicked(JButton button) {
 		if(button == enterButton) {
+			if(selectedBook == null) {
+				messageBox("Please select a book to return");
+				return;
+			}
 			Book updated = new Book(selectedBook.getTitle(), selectedBook.getAuthor(), null, null, false);
 			books.set(indexSelected, updated);
 			dispose();

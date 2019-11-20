@@ -27,12 +27,17 @@ public class Library {
 		return d;
 	}
 	
+	public ArrayList<Book> getOverdueBooks(){
+		ArrayList<Book> overdue = new ArrayList<Book>();
+		for(Book b : books) {
+			System.out.println("hello");
+			if(b.isOverdue(d))overdue.add(b);
+		}
+		return overdue;
+	}
+	
 	public Library() {
-		int day = Calendar.getInstance().get(Calendar.DATE);
-		int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-		int year = Calendar.getInstance().get(Calendar.YEAR);
-		
-		d = new Date(month,day,year);
+		d = new Date();
 	}
 	
 }

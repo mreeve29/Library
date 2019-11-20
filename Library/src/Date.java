@@ -1,20 +1,33 @@
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 public class Date {
 
+	private Calendar c;
+	
 	private int month;
 	private int day;
 	private int year;
+	private long timeInMillis;
+	
+	public static final long FOURTEEN_DAYS = 1210000000;
 	
 	public Date(int m, int d, int y) {
 		month = m;
 		day = d;
 		year = y;
+		updateTime();
 	}
 	
 	public Date() {
-		month = 1;
-		day = 1;
-		year = 2000;
+		c = Calendar.getInstance();
+		day = c.get(Calendar.DATE);
+		month = c.get(Calendar.MONTH) + 1;
+		year = c.get(Calendar.YEAR);
+		c = removeTimeFromDate(c);
+		updateTime();
 	}
 	
 	public Date(Date d) {
@@ -37,14 +50,39 @@ public class Date {
 	
 	public void setDay(int d) {
 		day = d;
+		updateTime();
 	}
 	
 	public void setMonth(int m) {
 		month = m;
+		updateTime();
 	}
 	
 	public void setYear(int y) {
 		year = y;
+		updateTime();
+	}
+	
+	private void updateTime() {
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month, day);
+		cal = removeTimeFromDate(cal);
+		timeInMillis = cal.getTimeInMillis();
+		
+	}
+	
+	public static Calendar removeTimeFromDate(Calendar c) {
+		Calendar cal = c;
+		cal.setTimeZone(TimeZone.getTimeZone("EST"));
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return cal;
+	}
+
+	public long getTime() {
+		return timeInMillis;
 	}
 	
 	public String toString() {

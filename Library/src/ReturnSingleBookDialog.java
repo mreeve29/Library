@@ -1,5 +1,6 @@
 import BreezySwing.*;
 
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -31,6 +32,7 @@ public class ReturnSingleBookDialog extends GBDialog{
 		index = i;
 		
 		bookDetails.setEditable(false);
+		bookDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		bookDetails.setText(b.toString());
 		
 		setVisible(true);
