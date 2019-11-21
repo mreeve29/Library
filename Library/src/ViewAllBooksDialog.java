@@ -1,17 +1,8 @@
-import java.awt.Color;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
-
+import javax.swing.*;
 import BreezySwing.GBDialog;
+@SuppressWarnings("serial")
 public class ViewAllBooksDialog extends GBDialog{
 
 	private ArrayList<Book> books;
@@ -19,7 +10,9 @@ public class ViewAllBooksDialog extends GBDialog{
 	private Book selectedBook;
 	private int indexSelected;
 	
-	private JList bookList = addList(1,1,1,1);
+	@SuppressWarnings("unused")
+	private JLabel label = addLabel("All books in library. Click on a book to check it out or return it",1,1,1,1);
+	private JList<String> bookList = addList(2,1,1,1);
 	
 	private JFrame main;
 	
@@ -36,22 +29,23 @@ public class ViewAllBooksDialog extends GBDialog{
 	}
 	
 	private void addItemToList(String add) {
-		DefaultListModel model = (DefaultListModel)bookList.getModel();
+		DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
         model.addElement(add);
 	}
 	
-	public void listItemSelected(JList list) {
+	public void listItemSelected(JList<String> list) {
 		selectedBook = books.get(list.getSelectedIndex());
 		indexSelected = list.getSelectedIndex();
 		openDialog();
 	}
 	
-	public void listDoubleClicked(JList list, String itemClicked) {
+	public void listDoubleClicked(JList<String> list, String itemClicked) {
 		selectedBook = books.get(list.getSelectedIndex());
 		indexSelected = list.getSelectedIndex();
 		openDialog();
 	}
 	
+	@SuppressWarnings("unused")
 	private void openDialog() {
 		if(selectedBook.isCheckedOut()) {
 			//open return dialog
@@ -65,7 +59,7 @@ public class ViewAllBooksDialog extends GBDialog{
 	}
 	
 	private void refreshList() {
-		 DefaultListModel model = (DefaultListModel)bookList.getModel();
+		 DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
 	     model.removeAllElements();
 	     populateList();
 	}

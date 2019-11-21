@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
+@SuppressWarnings("serial")
 public class ReturnBookDialog extends GBDialog{
 	
 	private ArrayList<Book> books;
@@ -12,7 +13,7 @@ public class ReturnBookDialog extends GBDialog{
 	private Book selectedBook;
 	private int indexSelected;
 	
-	private JList bookList = addList(1,1,1,1);
+	private JList<String> bookList = addList(1,1,1,1);
 	private JTextArea bookDetails = addTextArea("Book Selected: ",1,2,2,1);
 	
 	private JButton enterButton = addButton("Return Book",3,2,1,1);
@@ -37,20 +38,22 @@ public class ReturnBookDialog extends GBDialog{
 	}
 	
 	private void addItemToList(String add) {
-		DefaultListModel model = (DefaultListModel)bookList.getModel();
+		DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
         model.addElement(add);
 	}
 	
-	public void listItemSelected(JList list) {
+	public void listItemSelected(JList<String> list, String itemSelected) {
 		bookDetails.setText("Book Selected:\n" + checkedOut.get(list.getSelectedIndex()).toString());
 		selectedBook = checkedOut.get(list.getSelectedIndex());
 		indexSelected = books.indexOf(selectedBook);
+		revalidate();
 	}
 	
-	public void listDoubleClicked(JList list) {
+	public void listDoubleClicked(JList<String> list, String itemSelected) {
 		bookDetails.setText("Book Selected:\n" + checkedOut.get(list.getSelectedIndex()).toString());
 		selectedBook = checkedOut.get(list.getSelectedIndex());
 		indexSelected = books.indexOf(selectedBook);
+		revalidate();
 	}
 	
 	
@@ -66,8 +69,8 @@ public class ReturnBookDialog extends GBDialog{
 		populateList();
 		
 
-		this.setTitle("Loan Out Book");
-		this.setSize(400,400);
+		this.setTitle("Return Book");
+		this.setSize(600,400);
 		this.setVisible(true);
 	}
 }

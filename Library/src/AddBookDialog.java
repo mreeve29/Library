@@ -3,11 +3,14 @@ import BreezySwing.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
+@SuppressWarnings("serial")
 public class AddBookDialog extends GBDialog{
 
+	@SuppressWarnings("unused")
 	private JLabel bookTitleLabel = addLabel("Book Title:",1,1,1,1);
 	private JTextField bookTitleField = addTextField("",1,2,1,1);
 	
+	@SuppressWarnings("unused")
 	private JLabel bookAuthorLabel = addLabel("Book Author:",2,1,1,1);
 	private JTextField bookAuthorField = addTextField("",2,2,1,1);
 	

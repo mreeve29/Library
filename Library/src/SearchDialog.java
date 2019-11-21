@@ -1,27 +1,27 @@
 import BreezySwing.*;
 
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
+@SuppressWarnings("serial")
 public class SearchDialog extends GBDialog{
 
 	private ArrayList<Book> books;
 	
+	@SuppressWarnings("unused")
 	private JLabel searchLabel = addLabel("Search for book by keyword:",1,1,2,1);
 	private JTextField searchField = addTextField("",2,1,2,1);
-	private JList list = addList(3,1,1,1);
+	private JList<String> list = addList(3,1,1,1);
 	private JTextArea bookDetails = addTextArea("",3,2,1,1);
 	
-	public void listItemSelected(JList list) {
+	public void listItemSelected(JList<String> list) {
 		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
 		revalidate();
 	}
 	
-	public void listDoubleClicked(JList list, String itemClicked) {
+	public void listDoubleClicked(JList<String> list, String itemClicked) {
 		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
 		revalidate();
 	}
@@ -63,12 +63,12 @@ public class SearchDialog extends GBDialog{
 	}
 	
 	private void addItemToList(String add) {
-		DefaultListModel model = (DefaultListModel)list.getModel();
+		DefaultListModel<String> model = (DefaultListModel<String>)list.getModel();
         model.addElement(add);
 	}
 	
 	private void resetList() {
-		 DefaultListModel model = (DefaultListModel)list.getModel();
+		 DefaultListModel<String> model = (DefaultListModel<String>)list.getModel();
 	     model.removeAllElements();
 	}
 	

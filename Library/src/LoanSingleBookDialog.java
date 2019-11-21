@@ -1,10 +1,10 @@
 import BreezySwing.*;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
+@SuppressWarnings("serial")
 public class LoanSingleBookDialog extends GBDialog{
 	
 	private ArrayList<Book> books;
@@ -12,6 +12,7 @@ public class LoanSingleBookDialog extends GBDialog{
 	private Book selectedBook;
 	private int indexSelected;
 	
+	@SuppressWarnings("unused")
 	private JLabel loanLabel = addLabel("Are you sure you want to loan out...",1,1,1,1);
 	private JTextArea bookDetails = addTextArea("",2,1,2,1);
 	private JTextField borrowerNameField = addTextField("",3,2,1,1);
@@ -19,9 +20,13 @@ public class LoanSingleBookDialog extends GBDialog{
 	private IntegerField dayField = addIntegerField(1,5,2,1,1);
 	private IntegerField yearField = addIntegerField(2000,6,2,1,1);
 	
+	@SuppressWarnings("unused")
 	private JLabel borrowLabel = addLabel("Borrower:",3,1,1,1);
+	@SuppressWarnings("unused")
 	private JLabel monthLabel = addLabel("Month:",4,1,1,1);
+	@SuppressWarnings("unused")
 	private JLabel dayLabel = addLabel("Day:",5,1,1,1);
+	@SuppressWarnings("unused")
 	private JLabel yearLabel = addLabel("Year:",6,1,1,1);
 	
 	private JButton enterButton = addButton("Loan book",7,2,1,1);
@@ -60,6 +65,10 @@ public class LoanSingleBookDialog extends GBDialog{
 		super(parent);
 		bookDetails.setEditable(false);
 		bookDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		
+		dayField.setNumber(d.getDay());
+		monthField.setNumber(d.getMonth());
+		yearField.setNumber(d.getYear());
 
 		selectedBook = b;
 		books = list;

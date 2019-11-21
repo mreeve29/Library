@@ -4,12 +4,14 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
+@SuppressWarnings("serial")
 public class ReturnSingleBookDialog extends GBDialog{
 
 	private ArrayList<Book> books;
 	private Book book;
 	private int index;
 	
+	@SuppressWarnings("unused")
 	private JLabel returnLabel = addLabel("Are you sure you want to return?",1,1,2,1);
 	
 	private JTextArea bookDetails = addTextArea("",2,1,2,1);

@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
+@SuppressWarnings("serial")
 public class LoanBookDialog extends GBDialog{
 	
 	private ArrayList<Book> books;
@@ -12,16 +13,20 @@ public class LoanBookDialog extends GBDialog{
 	private Book selectedBook;
 	private int indexSelected;
 	
-	private JList bookList = addList(1,1,1,1);
+	private JList<String> bookList = addList(1,1,1,1);
 	private JTextArea bookDetails = addTextArea("Book Selected: ",1,2,2,1);
 	private JTextField borrowerNameField = addTextField("",2,2,1,1);
 	private IntegerField monthField = addIntegerField(1,3,2,1,1);
 	private IntegerField dayField = addIntegerField(1,4,2,1,1);
 	private IntegerField yearField = addIntegerField(2000,5,2,1,1);
 	
+	@SuppressWarnings("unused")
 	private JLabel borrowLabel = addLabel("Borrower:",2,1,1,1);
+	@SuppressWarnings("unused")
 	private JLabel monthLabel = addLabel("Month:",3,1,1,1);
+	@SuppressWarnings("unused")
 	private JLabel dayLabel = addLabel("Day:",4,1,1,1);
+	@SuppressWarnings("unused")
 	private JLabel yearLabel = addLabel("Year:",5,1,1,1);
 	
 	private JButton enterButton = addButton("Loan book",6,2,1,1);
@@ -72,17 +77,17 @@ public class LoanBookDialog extends GBDialog{
 	}
 	
 	private void addItemToList(String add) {
-		DefaultListModel model = (DefaultListModel)bookList.getModel();
+		DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
         model.addElement(add);
 	}
 	
-	public void listItemSelected(JList list) {
+	public void listItemSelected(JList<String> list) {
 		bookDetails.setText("Book Selected:\n" + available.get(list.getSelectedIndex()).toString());
 		selectedBook = available.get(list.getSelectedIndex());
 		indexSelected = books.indexOf(selectedBook);
 	}
 	
-	public void listDoubleClicked(JList list, String itemSelected) {
+	public void listDoubleClicked(JList<String> list, String itemSelected) {
 		bookDetails.setText("Book Selected:\n" + available.get(list.getSelectedIndex()).toString());
 		selectedBook = available.get(list.getSelectedIndex());
 		indexSelected = books.indexOf(selectedBook);

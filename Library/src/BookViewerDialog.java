@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
+@SuppressWarnings("serial")
 public class BookViewerDialog extends GBDialog{
 
 	private ArrayList<Book> books;
@@ -32,26 +33,21 @@ public class BookViewerDialog extends GBDialog{
 	private void populateList() {
 		if(books.size() == 0)return;
 		for(Book b : books) {
-//			if(b.isCheckedOut()) {
-//				addItemToList("<html>" + b.getTitle() + " - " + "<font color='red'>Checked Out</font></html>");
-//			}else {
-//				addItemToList("<html>" + b.getTitle() + " - " + "<html><font color='green'>Available</font></html>");
-//			}
 			addItemToList(b.getTitle());
 		}
 	}
 	
 	
 	private void addItemToList(String add) {
-		DefaultListModel model = (DefaultListModel)bookList.getModel();
+		DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
         model.addElement(add);
 	}
 	
-	public void listItemSelected(JList list) {
+	public void listItemSelected(JList<String> list) {
 		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
 	}
 	
-	public void listDoubleClicked(JList list, String itemClicked) {
+	public void listDoubleClicked(JList<String> list, String itemClicked) {
 		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
 	}
 

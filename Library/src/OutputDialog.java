@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.*;
+@SuppressWarnings("serial")
 public class OutputDialog extends GBDialog{
 
 	private JLabel baseLabel = addLabel("",1,1,1,1);

@@ -2,6 +2,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import BreezySwing.GBFrame;
+@SuppressWarnings("serial")
 public class LibraryGUI extends GBFrame{
 	
 	private Library lib;
@@ -15,6 +16,7 @@ public class LibraryGUI extends GBFrame{
 	private JButton showAllOverdueBooksButton = addButton("Show Overdue Books",5,1,1,1);
 	private JButton showAllLoanedBooksButton = addButton("Show Loaned Books",5,2,1,1);
 	
+	@SuppressWarnings("unused")
 	public void buttonClicked(JButton button) {
 		if(button == newBookButton) {
 			AddBookDialog bookDialog = new AddBookDialog(this,lib.getBooks());
