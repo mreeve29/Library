@@ -46,5 +46,4 @@ public class Library {
 	public Library() {
 		d = new Date();
 	}
-	
 }

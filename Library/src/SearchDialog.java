@@ -1,5 +1,7 @@
 import BreezySwing.*;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -16,10 +18,12 @@ public class SearchDialog extends GBDialog{
 	
 	public void listItemSelected(JList list) {
 		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
+		revalidate();
 	}
 	
 	public void listDoubleClicked(JList list, String itemClicked) {
 		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
+		revalidate();
 	}
 	
 	private KeyListener searchFieldKL = new KeyListener() {
@@ -82,7 +86,7 @@ public class SearchDialog extends GBDialog{
 		bookDetails.setEditable(false);
 		searchField.addKeyListener(searchFieldKL);
 		
-		this.setSize(500,400);
+		this.setSize(676,434);
 		this.setTitle("Book Finder");
 		this.setVisible(true);
 	}

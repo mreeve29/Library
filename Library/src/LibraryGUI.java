@@ -7,13 +7,13 @@ public class LibraryGUI extends GBFrame{
 	private Library lib;
 	private JLabel dateLabel = addLabel("",1,1,1,1);
 	private JButton newBookButton = addButton("New Book",2,1,1,1);
-	private JButton searchButton = addButton("Search Books",3,1,1,1);
-	private JButton newLoanButton = addButton("Loan Out Book",4,1,1,1);
-	private JButton returnButton = addButton("Return Book",5,1,1,1);
-	private JButton outputAllBooksButton = addButton("Output All Books",6,1,1,1);
-	private JButton extraCreditButton = addButton("Extra Credit",7,1,1,1);
-	private JButton showAllOverdueBooksButton = addButton("Show Overdue Books",8,1,1,1);
-	private JButton showAllLoanedBooksButton = addButton("Show Loaned Books",9,1,1,1);
+	private JButton searchButton = addButton("Search Books",2,2,1,1);
+	private JButton newLoanButton = addButton("Loan Out Book",3,1,1,1);
+	private JButton returnButton = addButton("Return Book",3,2,1,1);
+	private JButton outputAllBooksButton = addButton("Output All Books",4,1,1,1);
+	private JButton extraCreditButton = addButton("Extra Credit",4,2,1,1);
+	private JButton showAllOverdueBooksButton = addButton("Show Overdue Books",5,1,1,1);
+	private JButton showAllLoanedBooksButton = addButton("Show Loaned Books",5,2,1,1);
 	
 	public void buttonClicked(JButton button) {
 		if(button == newBookButton) {
