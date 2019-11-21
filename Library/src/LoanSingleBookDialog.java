@@ -1,5 +1,6 @@
 import BreezySwing.*;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -65,7 +66,6 @@ public class LoanSingleBookDialog extends GBDialog{
 		indexSelected = i;
 
 		bookDetails.setText(selectedBook.toString());
-		
 		this.setTitle("Loan Out Book");
 		this.setSize(400,400);
 		this.setVisible(true);

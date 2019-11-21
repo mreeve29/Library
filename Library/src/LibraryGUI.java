@@ -13,6 +13,7 @@ public class LibraryGUI extends GBFrame{
 	private JButton outputAllBooksButton = addButton("Output All Books",6,1,1,1);
 	private JButton extraCreditButton = addButton("Extra Credit",7,1,1,1);
 	private JButton showAllOverdueBooksButton = addButton("Show Overdue Books",8,1,1,1);
+	private JButton showAllLoanedBooksButton = addButton("Show Loaned Books",9,1,1,1);
 	
 	public void buttonClicked(JButton button) {
 		if(button == newBookButton) {
@@ -22,7 +23,7 @@ public class LibraryGUI extends GBFrame{
 			SearchDialog sd = new SearchDialog(this, lib.getBooks());
 			
 		}else if(button == newLoanButton) {
-			LoanBookDialog lbd = new LoanBookDialog(this, lib.getBooks(), lib.getDate());
+			LoanBookDialog lbd = new LoanBookDialog(this, lib);
 			
 		}else if(button == returnButton) {
 			ReturnBookDialog rbd = new ReturnBookDialog(this, lib.getBooks());
@@ -34,7 +35,9 @@ public class LibraryGUI extends GBFrame{
 			ViewAllBooksDialog vabd = new ViewAllBooksDialog(this, lib.getBooks());
 			
 		}else if(button == showAllOverdueBooksButton) {
-			OutputDialog od = new OutputDialog(this, lib.getOverdueBooks(), "Overdue books in library:", "Overdue Books");
+			BookViewerDialog bvd = new BookViewerDialog(this, lib.getOverdueBooks(), "All overdue books", "Overdue books:");
+		}else if(button == showAllLoanedBooksButton) {
+			BookViewerDialog bvd = new BookViewerDialog(this, lib.getCheckedOutBooks(), "All loaned out books", "Loaned out books:");
 		}
 	}
 	

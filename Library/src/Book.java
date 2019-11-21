@@ -89,7 +89,6 @@ public class Book {
 		newCal.set(d.getYear(), d.getMonth(), d.getDay());
 		newCal = Date.removeTimeFromDate(newCal);
 		if(!checkedOut)return false;
-		System.out.println(newCal.getTimeInMillis() + " - " + borrowDate.getTime() + " > " + Date.FOURTEEN_DAYS);
 		if(newCal.getTimeInMillis() - borrowDate.getTime() > Date.FOURTEEN_DAYS) {
 			return true;
 		}else return false;

@@ -89,16 +89,20 @@ public class LoanBookDialog extends GBDialog{
 	}
 	
 	
-	public LoanBookDialog(JFrame parent, ArrayList<Book> list, Date d) {
+	public LoanBookDialog(JFrame parent, Library lib) {
 		super(parent);
 		bookDetails.setEditable(false);
 		bookDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
-		books = list;
-		for(Book b : list) {
+		
+		
+		books = lib.getBooks();
+		for(Book b : books) {
 			if(!b.isCheckedOut())available.add(b);
 		}
 		populateList();
+		
+		Date d = lib.getDate();
 		
 		monthField.setNumber(d.getMonth());
 		dayField.setNumber(d.getDay());

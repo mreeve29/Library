@@ -30,10 +30,17 @@ public class Library {
 	public ArrayList<Book> getOverdueBooks(){
 		ArrayList<Book> overdue = new ArrayList<Book>();
 		for(Book b : books) {
-			System.out.println("hello");
 			if(b.isOverdue(d))overdue.add(b);
 		}
 		return overdue;
+	}
+	
+	public ArrayList<Book> getCheckedOutBooks(){
+		ArrayList<Book> checkedOut = new ArrayList<Book>();
+		for(Book b : books) {
+			if(b.isCheckedOut())checkedOut.add(b);
+		}
+		return checkedOut;
 	}
 	
 	public Library() {
