@@ -32,6 +32,7 @@ public class Date {
 		month = d.getMonth();
 		day = d.getDay();
 		year = d.getYear();
+		updateTime();
 	}
 	
 	public int getMonth() {

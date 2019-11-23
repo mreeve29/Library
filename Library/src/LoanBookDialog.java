@@ -13,6 +13,8 @@ public class LoanBookDialog extends GBDialog{
 	private Book selectedBook;
 	private int indexSelected;
 	
+	private Date current;
+	
 	private JList<String> bookList = addList(1,1,1,1);
 	private JTextArea bookDetails = addTextArea("Book Selected: ",1,2,2,1);
 	private JTextField borrowerNameField = addTextField("",2,2,1,1);
@@ -51,6 +53,11 @@ public class LoanBookDialog extends GBDialog{
 				d.validateDate();
 			}catch(IllegalDateException e) {
 				messageBox(e.getMessage());
+				return;
+			}
+			
+			if(d.getTime() > current.getTime()) {
+				messageBox("Loan date cannot be before current date");
 				return;
 			}
 			
@@ -99,7 +106,7 @@ public class LoanBookDialog extends GBDialog{
 		bookDetails.setEditable(false);
 		bookDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
 
-		
+		current = new Date(lib.getDate());
 		
 		books = lib.getBooks();
 		for(Book b : books) {
@@ -107,11 +114,11 @@ public class LoanBookDialog extends GBDialog{
 		}
 		populateList();
 		
-		Date d = lib.getDate();
+		current = lib.getDate();
 		
-		monthField.setNumber(d.getMonth());
-		dayField.setNumber(d.getDay());
-		yearField.setNumber(d.getYear());
+		monthField.setNumber(current.getMonth());
+		dayField.setNumber(current.getDay());
+		yearField.setNumber(current.getYear());
 
 		this.setTitle("Loan Out Book");
 		this.setSize(400,400);
