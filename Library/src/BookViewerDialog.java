@@ -14,6 +14,15 @@ public class BookViewerDialog extends GBDialog{
 	private JList<String> bookList = addList(2,1,1,1);
 	private JTextArea bookDetails = addTextArea("",2,2,1,1);
 	
+	private JButton closeButton = addButton("Close",3,2,1,1);
+	
+	
+	public void buttonClicked(JButton button) {
+		if(button == closeButton) {
+			dispose();
+		}
+	}
+	
 	public BookViewerDialog(JFrame parent, ArrayList<Book> list, String dialogTitle, String labelText, Date d) {
 		super(parent);
 		

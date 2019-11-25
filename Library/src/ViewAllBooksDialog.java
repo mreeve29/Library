@@ -15,7 +15,15 @@ public class ViewAllBooksDialog extends GBDialog{
 	private JLabel label = addLabel("All books in library. Click on a book to check it out or return it",1,1,1,1);
 	private JList<String> bookList = addList(2,1,1,1);
 	
+	private JButton closeButton = addButton("Close",3,1,1,1);
+	
 	private JFrame main;
+	
+	public void buttonClicked(JButton button) {
+		if(button == closeButton) {
+			dispose();
+		}
+	}
 	
 	private void populateList() {
 		if(books.size() == 0)return;

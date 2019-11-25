@@ -32,6 +32,7 @@ public class LoanSingleBookDialog extends GBDialog{
 	private JLabel yearLabel = addLabel("Year:",6,1,1,1);
 	
 	private JButton enterButton = addButton("Loan book",7,2,1,1);
+	private JButton cancelButton = addButton("Cancel",7,1,1,1);
 	
 	public void buttonClicked(JButton button) {
 		if(button == enterButton) {
@@ -57,6 +58,8 @@ public class LoanSingleBookDialog extends GBDialog{
 			
 			Book updated = new Book(selectedBook.getTitle(), selectedBook.getAuthor(), borrower, d, true);
 			books.set(indexSelected, updated);
+			dispose();
+		}else if(button == cancelButton) {
 			dispose();
 		}
 	}

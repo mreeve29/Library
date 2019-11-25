@@ -15,6 +15,7 @@ public class AddBookDialog extends GBDialog{
 	private JTextField bookAuthorField = addTextField("",2,2,1,1);
 	
 	private JButton enterButton = addButton("Add book to library",3,2,1,1);
+	private JButton cancelButton = addButton("Cancel",3,1,1,1);
 	
 	private ArrayList<Book> books;
 	
@@ -32,6 +33,8 @@ public class AddBookDialog extends GBDialog{
 			}
 			
 			books.add(new Book(title,author,null,null, false));
+			dispose();
+		}else if(button == cancelButton) {
 			dispose();
 		}
 	}

@@ -10,6 +10,14 @@ public class OutputDialog extends GBDialog{
 	private JLabel baseLabel = addLabel("",1,1,1,1);
 	private JTextArea bookArea = addTextArea("",2,1,1,1);
 	
+	private JButton closeButton = addButton("Close",3,1,1,1);
+	
+	public void buttonClicked(JButton button) {
+		if(button == closeButton) {
+			dispose();
+		}
+	}
+	
 	public OutputDialog(JFrame parent, ArrayList<Book> list, String label, String title) {
 		super(parent);
 		

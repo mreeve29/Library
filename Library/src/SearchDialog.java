@@ -18,6 +18,14 @@ public class SearchDialog extends GBDialog{
 	private JList<String> list = addList(3,1,1,1);
 	private JTextArea bookDetails = addTextArea("",3,2,1,1);
 	
+	private JButton closeButton = addButton("Close",4,1,2,1);
+	
+	public void buttonClicked(JButton button) {
+		if(button == closeButton) {
+			dispose();
+		}
+	}
+	
 	public void listItemSelected(JList<String> list) {
 		if(booksInList.get(list.getSelectedIndex()).isOverdue(current)) {
 			bookDetails.setText(booksInList.get(list.getSelectedIndex()).toString() + "\nOVERDUE");

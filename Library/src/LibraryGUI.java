@@ -12,10 +12,11 @@ public class LibraryGUI extends GBFrame{
 	private JButton newLoanButton = addButton("Loan Out Book",4,1,1,1);
 	private JButton returnButton = addButton("Return Book",5,1,1,1);
 	private JButton outputAllBooksButton = addButton("Show All Books",2,2,1,1);
-	private JButton extraCreditButton = addButton("Extra Credit",6,1,2,1);
+	private JButton extraCreditButton = addButton("Extra Credit",6,1,1,1);
 	private JButton showAllOverdueBooksButton = addButton("Show Overdue Books",5,2,1,1);
 	private JButton showAllLoanedBooksButton = addButton("Show Loaned Books",4,2,1,1);
 	private JButton showAllAvailableBooksButton = addButton("Show Available Books",3,2,1,1);
+	private JButton quitButton = addButton("Quit",6,2,1,1);
 	
 	@SuppressWarnings("unused")
 	public void buttonClicked(JButton button) {
@@ -26,9 +27,17 @@ public class LibraryGUI extends GBFrame{
 			SearchDialog sd = new SearchDialog(this, lib);
 			
 		}else if(button == newLoanButton) {
+			if(lib.getAvailableBooks().size() == 0) {
+				messageBox("There are no books to loan out");
+				return;
+			}
 			LoanBookDialog lbd = new LoanBookDialog(this, lib);
 			
 		}else if(button == returnButton) {
+			if(lib.getCheckedOutBooks().size() == 0) {
+				messageBox("There are no books to return");
+				return;
+			}
 			ReturnBookDialog rbd = new ReturnBookDialog(this, lib.getBooks());
 			
 		}else if(button == outputAllBooksButton) {
@@ -58,6 +67,8 @@ public class LibraryGUI extends GBFrame{
 				return;
 			}
 			OutputDialog od = new OutputDialog(this, lib.getAvailableBooks(), "Books in Library:", "Available Books");
+		}else if(button == quitButton) {
+			System.exit(1);
 		}
 	}
 	
