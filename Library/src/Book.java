@@ -79,7 +79,7 @@ public class Book {
 					"Date Checked Out: " + borrowDate;
 		}else {
 			out += "Available\n";
-		}		
+		}	
 		return out;
 		
 	}

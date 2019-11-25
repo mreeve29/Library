@@ -7,13 +7,14 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class BookViewerDialog extends GBDialog{
 
+	private Date current;
 	private ArrayList<Book> books;
 	
 	private JLabel label = addLabel("",1,1,1,1);
 	private JList<String> bookList = addList(2,1,1,1);
 	private JTextArea bookDetails = addTextArea("",2,2,1,1);
 	
-	public BookViewerDialog(JFrame parent, ArrayList<Book> list, String dialogTitle, String labelText) {
+	public BookViewerDialog(JFrame parent, ArrayList<Book> list, String dialogTitle, String labelText, Date d) {
 		super(parent);
 		
 		books = list;
@@ -24,6 +25,8 @@ public class BookViewerDialog extends GBDialog{
 		label.setText(labelText);
 		
 		populateList();
+		
+		current = new Date(d);
 		
 		this.setTitle(dialogTitle);
 		this.setSize(400,400);
@@ -37,18 +40,27 @@ public class BookViewerDialog extends GBDialog{
 		}
 	}
 	
-	
 	private void addItemToList(String add) {
 		DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
         model.addElement(add);
 	}
 	
 	public void listItemSelected(JList<String> list) {
-		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
+		if(books.get(list.getSelectedIndex()).isOverdue(current)) {
+			bookDetails.setText(books.get(list.getSelectedIndex()).toString() + "\nOVERDUE");
+		}else {
+			bookDetails.setText(books.get(list.getSelectedIndex()).toString());
+		}
+		revalidate();
 	}
 	
 	public void listDoubleClicked(JList<String> list, String itemClicked) {
-		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
+		if(books.get(list.getSelectedIndex()).isOverdue(current)) {
+			bookDetails.setText(books.get(list.getSelectedIndex()).toString() + "\nOVERDUE");
+		}else {
+			bookDetails.setText(books.get(list.getSelectedIndex()).toString());
+		}
+		revalidate();
 	}
 
 }

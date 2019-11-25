@@ -123,6 +123,18 @@ public class Date {
 		}
 	}
 	
+	public static int pgetDaysInMonth(int month, int year) {
+		int[] months = {31,28,31,30,31,30,31,31,30,31,30,31};
+		if(month == 2) {
+			if(year % 4 == 0 || (year % 100 == 0 && year % 400 == 0)) {
+				return 29;
+			}else {
+				return 28;
+			}
+		}
+		return months[month-1];
+	}
+	
 	public void validateDate() throws IllegalDateException{
 		if(month > 12 || month < 1) {
 			throw new IllegalDateException("Invalid month");

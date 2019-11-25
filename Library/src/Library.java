@@ -42,6 +42,14 @@ public class Library {
 		return checkedOut;
 	}
 	
+	public ArrayList<Book> getAvailableBooks(){
+		ArrayList<Book> available = new ArrayList<Book>();
+		for(Book b : books) {
+			if(!b.isCheckedOut())available.add(b);
+		}
+		return available;
+	}
+	
 	public Library() {
 		d = new Date();
 	}

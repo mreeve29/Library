@@ -8,13 +8,14 @@ public class LibraryGUI extends GBFrame{
 	private Library lib;
 	private JLabel dateLabel = addLabel("",1,1,1,1);
 	private JButton newBookButton = addButton("New Book",2,1,1,1);
-	private JButton searchButton = addButton("Search Books",2,2,1,1);
-	private JButton newLoanButton = addButton("Loan Out Book",3,1,1,1);
-	private JButton returnButton = addButton("Return Book",3,2,1,1);
-	private JButton outputAllBooksButton = addButton("Output All Books",4,1,1,1);
-	private JButton extraCreditButton = addButton("Extra Credit",4,2,1,1);
-	private JButton showAllOverdueBooksButton = addButton("Show Overdue Books",5,1,1,1);
-	private JButton showAllLoanedBooksButton = addButton("Show Loaned Books",5,2,1,1);
+	private JButton searchButton = addButton("Search Books",3,1,1,1);
+	private JButton newLoanButton = addButton("Loan Out Book",4,1,1,1);
+	private JButton returnButton = addButton("Return Book",5,1,1,1);
+	private JButton outputAllBooksButton = addButton("Show All Books",2,2,1,1);
+	private JButton extraCreditButton = addButton("Extra Credit",6,1,2,1);
+	private JButton showAllOverdueBooksButton = addButton("Show Overdue Books",5,2,1,1);
+	private JButton showAllLoanedBooksButton = addButton("Show Loaned Books",4,2,1,1);
+	private JButton showAllAvailableBooksButton = addButton("Show Available Books",3,2,1,1);
 	
 	@SuppressWarnings("unused")
 	public void buttonClicked(JButton button) {
@@ -22,7 +23,7 @@ public class LibraryGUI extends GBFrame{
 			AddBookDialog bookDialog = new AddBookDialog(this,lib.getBooks());
 			
 		}else if(button == searchButton) {
-			SearchDialog sd = new SearchDialog(this, lib.getBooks());
+			SearchDialog sd = new SearchDialog(this, lib);
 			
 		}else if(button == newLoanButton) {
 			LoanBookDialog lbd = new LoanBookDialog(this, lib);
@@ -31,22 +32,38 @@ public class LibraryGUI extends GBFrame{
 			ReturnBookDialog rbd = new ReturnBookDialog(this, lib.getBooks());
 			
 		}else if(button == outputAllBooksButton) {
-			OutputDialog od = new OutputDialog(this, lib.getBooks(), "All books in library:", "All Books");
+			if(lib.getBooks().size() == 0) {
+				messageBox("There are no books");
+				return;
+			}
+			OutputDialog od = new OutputDialog(this, lib.getBooks(), "All books:", "All Books");
 			
 		}else if(button == extraCreditButton) {
-			ViewAllBooksDialog vabd = new ViewAllBooksDialog(this, lib.getBooks());
-			
+			ViewAllBooksDialog vabd = new ViewAllBooksDialog(this, lib.getBooks(), lib.getDate());
 		}else if(button == showAllOverdueBooksButton) {
-			BookViewerDialog bvd = new BookViewerDialog(this, lib.getOverdueBooks(), "All overdue books", "Overdue books:");
+			if(lib.getOverdueBooks().size() == 0) {
+				messageBox("There are no avaliable books");
+				return;
+			}
+			BookViewerDialog bvd = new BookViewerDialog(this, lib.getOverdueBooks(), "Overdue books:", "Overdue books", lib.getDate());
 		}else if(button == showAllLoanedBooksButton) {
-			BookViewerDialog bvd = new BookViewerDialog(this, lib.getCheckedOutBooks(), "All loaned out books", "Loaned out books:");
+			if(lib.getCheckedOutBooks().size() == 0) {
+				messageBox("There are no loaned books");
+				return;
+			}
+			BookViewerDialog bvd = new BookViewerDialog(this, lib.getCheckedOutBooks(), "Loaned out books:", "Loaned out books", lib.getDate());
+		}else if(button == showAllAvailableBooksButton) {
+			if(lib.getAvailableBooks().size() == 0) {
+				messageBox("There are no avaliable books");
+				return;
+			}
+			OutputDialog od = new OutputDialog(this, lib.getAvailableBooks(), "Books in Library:", "Available Books");
 		}
 	}
 	
 	public LibraryGUI() {
 		lib = new Library();
 		dateLabel.setText("Current Date: " + lib.getDate().toString());
-		
 	}
 	
 	public static void main(String[] args) {

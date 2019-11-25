@@ -8,7 +8,9 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class SearchDialog extends GBDialog{
 
-	private ArrayList<Book> books;
+	private ArrayList<Book> allBooks;
+	private ArrayList<Book> booksInList = new ArrayList<Book>();
+	private Date current;
 	
 	@SuppressWarnings("unused")
 	private JLabel searchLabel = addLabel("Search for book by keyword:",1,1,2,1);
@@ -17,12 +19,20 @@ public class SearchDialog extends GBDialog{
 	private JTextArea bookDetails = addTextArea("",3,2,1,1);
 	
 	public void listItemSelected(JList<String> list) {
-		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
+		if(booksInList.get(list.getSelectedIndex()).isOverdue(current)) {
+			bookDetails.setText(booksInList.get(list.getSelectedIndex()).toString() + "\nOVERDUE");
+		}else {
+			bookDetails.setText(booksInList.get(list.getSelectedIndex()).toString());
+		}
 		revalidate();
 	}
 	
 	public void listDoubleClicked(JList<String> list, String itemClicked) {
-		bookDetails.setText(books.get(list.getSelectedIndex()).toString());
+		if(booksInList.get(list.getSelectedIndex()).isOverdue(current)) {
+			bookDetails.setText(booksInList.get(list.getSelectedIndex()).toString() + "\nOVERDUE");
+		}else {
+			bookDetails.setText(booksInList.get(list.getSelectedIndex()).toString());
+		}
 		revalidate();
 	}
 	
@@ -43,7 +53,8 @@ public class SearchDialog extends GBDialog{
 	};
 	
 	private void updateList(String search) {
-		for(Book b : books) {
+		booksInList.clear();
+		for(Book b : allBooks) {
 			boolean add = false;
 			for(String s : b.getKeywords()) {
 				String lowercase = s.toLowerCase();
@@ -52,8 +63,13 @@ public class SearchDialog extends GBDialog{
 				break;
 			}
 			if(add) {
+				booksInList.add(b);
 				if(b.isCheckedOut()) {
-					addItemToList("<html>" + b.getTitle() + " - " + "<font color='red'>Checked Out</font></html>");
+					if(b.isOverdue(current)) {
+						addItemToList("<html>" + b.getTitle() + " - " + "<font color='red'>OVERDUE</font></html>");
+					}else {
+						addItemToList("<html>" + b.getTitle() + " - " + "<font color='red'>Checked Out</font></html>");
+					}
 				}else {
 					addItemToList("<html>" + b.getTitle() + " - " + "<html><font color='green'>Available</font></html>");
 				}
@@ -79,12 +95,14 @@ public class SearchDialog extends GBDialog{
 		return true;
 	}
 	
-	public SearchDialog(JFrame parent, ArrayList<Book> list) {
+	public SearchDialog(JFrame parent, Library lib) {
 		super(parent);
 		
-		books = list;
+		allBooks = lib.getBooks();
 		bookDetails.setEditable(false);
 		searchField.addKeyListener(searchFieldKL);
+		
+		current = lib.getDate();
 		
 		this.setSize(676,434);
 		this.setTitle("Book Finder");

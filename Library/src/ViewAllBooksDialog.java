@@ -7,6 +7,7 @@ public class ViewAllBooksDialog extends GBDialog{
 
 	private ArrayList<Book> books;
 	
+	private Date current;
 	private Book selectedBook;
 	private int indexSelected;
 	
@@ -19,8 +20,11 @@ public class ViewAllBooksDialog extends GBDialog{
 	private void populateList() {
 		if(books.size() == 0)return;
 		for(Book b : books) {
-			if(b.isCheckedOut()) {
-				addItemToList("<html>" + b.getTitle() + " - " + "<font color='red'>Checked Out</font></html>");
+			if(b.isOverdue(current)) {
+				addItemToList("<html>" + b.getTitle() + " - " + "<font color='red'>OVERDUE</font> </html>");
+			}
+			else if(b.isCheckedOut()) {
+				addItemToList("<html>" + b.getTitle() + " - " + "<font color='red'>Checked Out</font> </html>");
 			}else {
 				addItemToList("<html>" + b.getTitle() + " - " + "<html><font color='green'>Available</font></html>");
 			}
@@ -64,8 +68,9 @@ public class ViewAllBooksDialog extends GBDialog{
 	     populateList();
 	}
 
-	public ViewAllBooksDialog(JFrame parent, ArrayList<Book> list) {
+	public ViewAllBooksDialog(JFrame parent, ArrayList<Book> list, Date d) {
 		super(parent);
+		current = new Date(d);
 		main = parent;
 		books = list;
 		populateList();
