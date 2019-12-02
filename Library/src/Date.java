@@ -3,15 +3,19 @@ import java.util.TimeZone;
 
 public class Date {
 
+	//class object
 	private Calendar c;
 	
+	//class variables
 	private int month;
 	private int day;
 	private int year;
 	private long timeInMillis;
 	
+	//used to determine overdue books
 	public static final long FOURTEEN_DAYS = 1210000000;
 	
+	//constructors
 	public Date(int m, int d, int y) {
 		month = m;
 		day = d;
@@ -28,6 +32,7 @@ public class Date {
 		updateTime();
 	}
 	
+	//default constructor sets date to current date
 	public Date(Date d) {
 		month = d.getMonth();
 		day = d.getDay();
@@ -35,6 +40,7 @@ public class Date {
 		updateTime();
 	}
 	
+	//getters
 	public int getMonth() {
 		return month;
 	}
@@ -47,6 +53,27 @@ public class Date {
 		return year;
 	}
 	
+	public long getTime() {
+		return timeInMillis;
+	}
+
+	public static int getDaysInMonth(int month, int year) {
+		int[] months = {31,28,31,30,31,30,31,31,30,31,30,31};
+		if(month == 2) {
+			if(year % 4 == 0 || (year % 100 == 0 && year % 400 == 0)) {
+				return 29;
+			}else {
+				return 28;
+			}
+		}
+		return months[month-1];
+	}
+
+	public String toString() {
+		return month + "/" + day + "/" + year;
+	}
+
+	//setters
 	public void setDay(int d) {
 		day = d;
 		updateTime();
@@ -62,6 +89,7 @@ public class Date {
 		updateTime();
 	}
 	
+	//updates millisecond time
 	private void updateTime() {
 		Calendar cal = Calendar.getInstance();
 		cal.set(year, month, day);
@@ -70,6 +98,7 @@ public class Date {
 		
 	}
 	
+	//helper method to remove hours minutes and seconds in milliseconds calculation
 	public static Calendar removeTimeFromDate(Calendar c) {
 		Calendar cal = c;
 		cal.setTimeZone(TimeZone.getTimeZone("EST"));
@@ -80,26 +109,7 @@ public class Date {
 		return cal;
 	}
 
-	public long getTime() {
-		return timeInMillis;
-	}
-	
-	public String toString() {
-		return month + "/" + day + "/" + year;
-	}
-	
-	public static int getDaysInMonth(int month, int year) {
-		int[] months = {31,28,31,30,31,30,31,31,30,31,30,31};
-		if(month == 2) {
-			if(year % 4 == 0 || (year % 100 == 0 && year % 400 == 0)) {
-				return 29;
-			}else {
-				return 28;
-			}
-		}
-		return months[month-1];
-	}
-	
+	//error checks date
 	public void validateDate() throws IllegalDateException{
 		if(month > 12 || month < 1) {
 			throw new IllegalDateException("Invalid month");
@@ -112,5 +122,5 @@ public class Date {
 			throw new IllegalDateException("Invalid year");
 		}
 	}
-	
+
 }
