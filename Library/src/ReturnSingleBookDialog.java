@@ -7,10 +7,12 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class ReturnSingleBookDialog extends GBDialog{
 
+	//class objects
 	private ArrayList<Book> books;
 	private Book book;
 	private int index;
 	
+	//elements
 	@SuppressWarnings("unused")
 	private JLabel returnLabel = addLabel("Are you sure you want to return?",1,1,2,1);
 	
@@ -29,6 +31,7 @@ public class ReturnSingleBookDialog extends GBDialog{
 		}
 	}
 	
+	//constructors
 	public ReturnSingleBookDialog(JFrame parent, ArrayList<Book> list, Book b, int i) {
 		super(parent);
 		

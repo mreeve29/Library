@@ -5,12 +5,14 @@ import BreezySwing.GBDialog;
 @SuppressWarnings("serial")
 public class ViewAllBooksDialog extends GBDialog{
 
+	//class objects
 	private ArrayList<Book> books;
 	
 	private Date current;
 	private Book selectedBook;
 	private int indexSelected;
 	
+	//elements
 	@SuppressWarnings("unused")
 	private JLabel label = addLabel("All books in library. Click on a book to check it out or return it",1,1,1,1);
 	private JList<String> bookList = addList(2,1,1,1);
@@ -25,6 +27,7 @@ public class ViewAllBooksDialog extends GBDialog{
 		}
 	}
 	
+	//adds books to list
 	private void populateList() {
 		if(books.size() == 0)return;
 		for(Book b : books) {
@@ -40,11 +43,13 @@ public class ViewAllBooksDialog extends GBDialog{
 		}
 	}
 	
+	//helper method that adds one String to the list
 	private void addItemToList(String add) {
 		DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
         model.addElement(add);
 	}
 	
+	//list event listeners
 	public void listItemSelected(JList<String> list) {
 		selectedBook = books.get(list.getSelectedIndex());
 		indexSelected = list.getSelectedIndex();
@@ -57,6 +62,7 @@ public class ViewAllBooksDialog extends GBDialog{
 		openDialog();
 	}
 	
+	//opens the respective dialog for the selected book depending on it's availability
 	@SuppressWarnings("unused")
 	private void openDialog() {
 		if(selectedBook.isCheckedOut()) {
@@ -70,12 +76,14 @@ public class ViewAllBooksDialog extends GBDialog{
 		}
 	}
 	
+	//resets list
 	private void refreshList() {
 		 DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
 	     model.removeAllElements();
 	     populateList();
 	}
 
+	//constructor
 	public ViewAllBooksDialog(JFrame parent, ArrayList<Book> list, Date d) {
 		super(parent);
 		current = new Date(d);

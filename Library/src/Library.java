@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 public class Library {
 	
-	private ArrayList<Book> books = new ArrayList<Book>();
+	//class objects
+	private ArrayList<Book> books = new ArrayList<Book>(); //holds all books
 	
 	private Date d;
 	
@@ -50,6 +51,7 @@ public class Library {
 		return available;
 	}
 	
+	//constructor
 	public Library() {
 		d = new Date();
 	}

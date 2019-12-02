@@ -7,6 +7,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class OutputDialog extends GBDialog{
 
+	//class objects/elements
 	private JLabel baseLabel = addLabel("",1,1,1,1);
 	private JTextArea bookArea = addTextArea("",2,1,1,1);
 	
@@ -18,6 +19,7 @@ public class OutputDialog extends GBDialog{
 		}
 	}
 	
+	//constructor
 	public OutputDialog(JFrame parent, ArrayList<Book> list, String label, String title) {
 		super(parent);
 		
@@ -31,6 +33,7 @@ public class OutputDialog extends GBDialog{
 		this.setVisible(true);
 	}
 	
+	//fills the output area with a given ArrayList
 	private void fillTextArea(ArrayList<Book> list) {
 		String books = "";
 		for(Book b : list) {

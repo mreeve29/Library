@@ -6,6 +6,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class AddBookDialog extends GBDialog{
 
+	//swing elements
 	@SuppressWarnings("unused")
 	private JLabel bookTitleLabel = addLabel("Book Title:",1,1,1,1);
 	private JTextField bookTitleField = addTextField("",1,2,1,1);
@@ -17,6 +18,7 @@ public class AddBookDialog extends GBDialog{
 	private JButton enterButton = addButton("Add book to library",3,2,1,1);
 	private JButton cancelButton = addButton("Cancel",3,1,1,1);
 	
+	//list of books, points back to library's list
 	private ArrayList<Book> books;
 	
 	public void buttonClicked(JButton button) {
@@ -32,6 +34,7 @@ public class AddBookDialog extends GBDialog{
 				return;
 			}
 			
+			//add book
 			books.add(new Book(title,author,null,null, false));
 			dispose();
 		}else if(button == cancelButton) {
@@ -39,6 +42,7 @@ public class AddBookDialog extends GBDialog{
 		}
 	}
 	
+	//error checking helper method
 	private boolean isBlank(String s) {
 		for(int i = 0; i < s.length(); i++) {
 			if(!Character.isWhitespace(s.charAt(i))) return false;
@@ -46,6 +50,7 @@ public class AddBookDialog extends GBDialog{
 		return true;
 	}
 	
+	//constructor
 	public AddBookDialog(JFrame parent, ArrayList<Book> list) {
 		super(parent);
 		books = list;

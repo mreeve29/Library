@@ -7,6 +7,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class LoanSingleBookDialog extends GBDialog{
 	
+	//class objects
 	private ArrayList<Book> books;
 	
 	private Book selectedBook;
@@ -14,6 +15,7 @@ public class LoanSingleBookDialog extends GBDialog{
 	
 	private Date current;
 	
+	//elements
 	@SuppressWarnings("unused")
 	private JLabel loanLabel = addLabel("Are you sure you want to loan out...",1,1,1,1);
 	private JTextArea bookDetails = addTextArea("",2,1,2,1);
@@ -71,6 +73,7 @@ public class LoanSingleBookDialog extends GBDialog{
 		return true;
 	}
 	
+	//constructor
 	public LoanSingleBookDialog(JFrame parent, ArrayList<Book> list, Book b, int i, Date d) {
 		super(parent);
 		bookDetails.setEditable(false);

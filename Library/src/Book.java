@@ -1,6 +1,8 @@
 import java.util.Calendar;
 
 public class Book {
+	
+	//instance class variables
 	private String title;
 	private String author;
 	private String borrower;
@@ -8,6 +10,7 @@ public class Book {
 	private boolean checkedOut;
 	private String[] keywords;
 	
+	//constructors
 	public Book() {
 		title = "";
 		author = "";
@@ -25,6 +28,7 @@ public class Book {
 		keywords = title.split(" ");
 	}
 	
+	//getters
 	public String getTitle() {
 		return title;
 	}
@@ -41,10 +45,30 @@ public class Book {
 		return borrowDate;
 	}
 	
+	public String[] getKeywords() {
+		return keywords;
+	}
+
 	public boolean isCheckedOut() {
 		return checkedOut;
 	}
 	
+	public String toString() {
+		String out =  
+				"Title: " + title + '\n' + 
+				"Author: " + author + '\n';
+		if(checkedOut) {
+			out += "Loaned Out\n" + 
+					"Borrower: " + borrower + '\n' +
+					"Date Checked Out: " + borrowDate;
+		}else {
+			out += "Available\n";
+		}	
+		return out;
+		
+	}
+
+	//setters
 	public void setTitle(String nm) {
 		title = nm;
 	}
@@ -63,25 +87,6 @@ public class Book {
 	
 	public void setCheckedOut(boolean b) {
 		checkedOut = b;
-	}
-	
-	public String[] getKeywords() {
-		return keywords;
-	}
-	
-	public String toString() {
-		String out =  
-				"Title: " + title + '\n' + 
-				"Author: " + author + '\n';
-		if(checkedOut) {
-			out += "Loaned Out\n" + 
-					"Borrower: " + borrower + '\n' +
-					"Date Checked Out: " + borrowDate;
-		}else {
-			out += "Available\n";
-		}	
-		return out;
-		
 	}
 	
 	public boolean isOverdue(Date d) {

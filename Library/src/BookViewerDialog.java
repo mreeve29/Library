@@ -7,6 +7,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class BookViewerDialog extends GBDialog{
 
+	//class objects
 	private Date current;
 	private ArrayList<Book> books;
 	
@@ -23,6 +24,7 @@ public class BookViewerDialog extends GBDialog{
 		}
 	}
 	
+	//constructor
 	public BookViewerDialog(JFrame parent, ArrayList<Book> list, String dialogTitle, String labelText, Date d) {
 		super(parent);
 		
@@ -42,18 +44,21 @@ public class BookViewerDialog extends GBDialog{
 		this.setVisible(true);
 	}
 
+	//adds books to list
 	private void populateList() {
 		if(books.size() == 0)return;
 		for(Book b : books) {
 			addItemToList(b.getTitle());
 		}
 	}
-	
+
+	//helper method to add single String to list
 	private void addItemToList(String add) {
 		DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
         model.addElement(add);
 	}
 	
+	//list event listeners
 	public void listItemSelected(JList<String> list) {
 		if(books.get(list.getSelectedIndex()).isOverdue(current)) {
 			bookDetails.setText(books.get(list.getSelectedIndex()).toString() + "\nOVERDUE");

@@ -7,6 +7,7 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class LoanBookDialog extends GBDialog{
 	
+	//class objects
 	private ArrayList<Book> books;
 	private ArrayList<Book> available = new ArrayList<Book>();
 	
@@ -15,6 +16,7 @@ public class LoanBookDialog extends GBDialog{
 	
 	private Date current;
 	
+	//elements
 	private JList<String> bookList = addList(1,1,1,1);
 	private JTextArea bookDetails = addTextArea("Book Selected: ",1,2,2,1);
 	private JTextField borrowerNameField = addTextField("",2,2,1,1);
@@ -78,7 +80,7 @@ public class LoanBookDialog extends GBDialog{
 		return true;
 	}
 	
-
+	//populates list with books
 	private void populateList() {
 		if(available.size() == 0)return;
 		for(Book b : available) {
@@ -86,11 +88,13 @@ public class LoanBookDialog extends GBDialog{
 		}
 	}
 	
+	//helper method that adds one String to list
 	private void addItemToList(String add) {
 		DefaultListModel<String> model = (DefaultListModel<String>)bookList.getModel();
         model.addElement(add);
 	}
 	
+	//list event listeners
 	public void listItemSelected(JList<String> list) {
 		bookDetails.setText("Book Selected:\n" + available.get(list.getSelectedIndex()).toString());
 		selectedBook = available.get(list.getSelectedIndex());
@@ -103,7 +107,7 @@ public class LoanBookDialog extends GBDialog{
 		indexSelected = books.indexOf(selectedBook);
 	}
 	
-	
+	//constructor
 	public LoanBookDialog(JFrame parent, Library lib) {
 		super(parent);
 		bookDetails.setEditable(false);

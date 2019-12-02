@@ -5,6 +5,7 @@ import BreezySwing.GBFrame;
 @SuppressWarnings("serial")
 public class LibraryGUI extends GBFrame{
 	
+	//class objects and elements
 	private Library lib;
 	private JLabel dateLabel = addLabel("",1,1,1,1);
 	private JButton newBookButton = addButton("New Book",2,1,1,1);
@@ -21,7 +22,7 @@ public class LibraryGUI extends GBFrame{
 	@SuppressWarnings("unused")
 	public void buttonClicked(JButton button) {
 		if(button == newBookButton) {
-			AddBookDialog bookDialog = new AddBookDialog(this,lib.getBooks());
+			AddBookDialog abd = new AddBookDialog(this,lib.getBooks());
 			
 		}else if(button == searchButton) {
 			SearchDialog sd = new SearchDialog(this, lib);
@@ -51,7 +52,7 @@ public class LibraryGUI extends GBFrame{
 			ViewAllBooksDialog vabd = new ViewAllBooksDialog(this, lib.getBooks(), lib.getDate());
 		}else if(button == showAllOverdueBooksButton) {
 			if(lib.getOverdueBooks().size() == 0) {
-				messageBox("There are no avaliable books");
+				messageBox("There are no overdue books");
 				return;
 			}
 			BookViewerDialog bvd = new BookViewerDialog(this, lib.getOverdueBooks(), "Overdue books:", "Overdue books", lib.getDate());
@@ -72,6 +73,7 @@ public class LibraryGUI extends GBFrame{
 		}
 	}
 	
+	//constructor
 	public LibraryGUI() {
 		lib = new Library();
 		dateLabel.setText("Current Date: " + lib.getDate().toString());
