@@ -59,11 +59,6 @@ public class LoanBookDialog extends GBDialog{
 				return;
 			}
 			
-			if(d.getTime() > current.getTime()) {
-				messageBox("Loan date cannot be before current date");
-				return;
-			}
-			
 			Book updated = new Book(selectedBook.getTitle(), selectedBook.getAuthor(), borrowerNameField.getText(), d,true);
 			books.set(indexSelected, updated);
 

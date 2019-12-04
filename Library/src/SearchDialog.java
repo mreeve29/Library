@@ -1,5 +1,6 @@
 import BreezySwing.*;
 
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -119,6 +120,8 @@ public class SearchDialog extends GBDialog{
 		searchField.addKeyListener(searchFieldKL);
 		
 		current = lib.getDate();
+		
+		bookDetails.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		
 		this.setSize(676,434);
 		this.setTitle("Book Finder");
