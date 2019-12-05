@@ -25,6 +25,10 @@ public class LibraryGUI extends GBFrame{
 			AddBookDialog abd = new AddBookDialog(this,lib.getBooks());
 			
 		}else if(button == searchButton) {
+			if(lib.getBooks().size() == 0) {
+				messageBox("There are no books to search for");
+				return;
+			}
 			SearchDialog sd = new SearchDialog(this, lib);
 			
 		}else if(button == newLoanButton) {
