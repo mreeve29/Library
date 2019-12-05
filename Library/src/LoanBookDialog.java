@@ -50,6 +50,11 @@ public class LoanBookDialog extends GBDialog{
 				return;
 			}
 			
+			if(!yearField.isValidNumber()) {
+				messageBox("Invalid year");
+				return;
+			}
+			
 			Date d = new Date(monthField.getNumber(), dayField.getNumber(), yearField.getNumber());
 			
 			try {

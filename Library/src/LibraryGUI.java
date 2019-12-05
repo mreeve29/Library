@@ -53,6 +53,10 @@ public class LibraryGUI extends GBFrame{
 			OutputDialog od = new OutputDialog(this, lib.getBooks(), "All books:", "All Books");
 			
 		}else if(button == extraCreditButton) {
+			if(lib.getBooks().size() == 0) {
+				messageBox("There are no books to display");
+				return;
+			}
 			ViewAllBooksDialog vabd = new ViewAllBooksDialog(this, lib.getBooks(), lib.getDate());
 		}else if(button == showAllOverdueBooksButton) {
 			if(lib.getOverdueBooks().size() == 0) {

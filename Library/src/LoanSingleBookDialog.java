@@ -43,6 +43,11 @@ public class LoanSingleBookDialog extends GBDialog{
 				messageBox("Empty borrower");
 				return;
 			}
+
+			if(!yearField.isValidNumber()) {
+				messageBox("Invalid year");
+				return;
+			}
 			
 			Date d = new Date(monthField.getNumber(), dayField.getNumber(), yearField.getNumber());
 			

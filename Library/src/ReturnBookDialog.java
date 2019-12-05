@@ -19,7 +19,7 @@ public class ReturnBookDialog extends GBDialog{
 	private JTextArea bookDetails = addTextArea("Book Selected: ",1,2,2,1);
 	
 	private JButton enterButton = addButton("Return Book",3,2,1,1);
-	private JButton cancelButton = addButton("Cancel",4,1,1,1);
+	private JButton cancelButton = addButton("Cancel",3,1,1,1);
 	
 	public void buttonClicked(JButton button) {
 		if(button == enterButton) {
